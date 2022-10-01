@@ -37,6 +37,7 @@ public class LinkedListDeque<T> {
     public void addLast(T x) {
         if(this.isEmpty()) {
             this.addFirst(x);
+            return;
         }
         else {
             Intnode p = new Intnode(null);
@@ -93,7 +94,7 @@ public class LinkedListDeque<T> {
     }
 
     public boolean isEmpty() {
-        if (head == tail) {
+        if (size == 0) {
             return true;
         }
         else {
@@ -103,4 +104,5 @@ public class LinkedListDeque<T> {
     public int size() {
         return this.size;
     }
+
 }
