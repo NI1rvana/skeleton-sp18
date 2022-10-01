@@ -8,7 +8,8 @@ public class ArrayDeque<T> {
     private int length,size,head,tail;
 
     public ArrayDeque() {
-        T[] item = (T[]) new Object[8];
+        T[] q = (T[]) new Object[8];
+        this.item = q;
         length = 8;
         head = tail = 4;
         size = 0;
@@ -19,28 +20,37 @@ public class ArrayDeque<T> {
         else return false;
     }
 
-    public void resize() {
-        T[] a = (T[]) new Object[2*length];
-        if(head >= tail)
-            System.arraycopy(item,head,a,0,tail - head);
-        else {
-            System.arraycopy(item,head,a,0,tail - 1 - head);
-            System.arraycopy(item,tail,a,tail - head,head - tail);
-        }
-        item = a;
+    private void resize() {
+        int p = head;
+        int n = item.length;
+        int r = n - p; // number of elements to the right of p
+        int newCapacity = n << 1;
+        T[] a = (T[]) new Object[newCapacity];
+        System.arraycopy(item, p, a, 0, r);
+        System.arraycopy(item, 0, a, r, p);
+        this.item = a;
+        length = newCapacity;
+        head = 0;
+        tail = n;
     }
-    /** Inserts X into the back of the list. */
-    public void addFirst(T x) {
-        item[head] = x;
-        head = (head - 1) & (length - 1);
-        if(head == tail)
+        /** Inserts X into the back of the list. */
+
+    public void addFirst(T e) {
+        item[head = (head - 1) & (item.length - 1)] = e;
+        if (head == tail)
             resize();
-        size += 1;
     }
+//    public void addFirst(T x) {
+//        item[head] = x;
+//        head = (head - 1) & (length - 1);
+//        if(size == length - 1)
+//            resize();
+//        size += 1;
+//    }
     public void addLast(T x) {
         item[tail] = x;
         tail = (tail + 1) & (length - 1);
-        if(head == tail)
+        if(size == length - 1)
             resize();
         size += 1;
     }
@@ -71,15 +81,14 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        int p = head;
-        for (int i = head; ; i++) {
-            if(i == length + 1) {
+        int p = (head + 1) % length;
+        for (int i = p;i != (tail - 1) ; i++) {
+            if(i == length) {
                 i = 0;
             }
-            System.out.print(item[i]);
-            if(i == tail) {
-                break;
-            }
+            System.out.println(item[i] + " ");
+
         }
     }
+
 }
