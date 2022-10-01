@@ -19,7 +19,7 @@ public class ArrayDeque<T> {
         else return false;
     }
 
-    public void resizing() {
+    public void resize() {
         T[] a = (T[]) new Object[2*length];
         if(head >= tail)
             System.arraycopy(item,head,a,0,tail - head);
@@ -34,21 +34,15 @@ public class ArrayDeque<T> {
         item[head] = x;
         head = (head - 1) & (length - 1);
         if(head == tail)
-            resizing();
+            resize();
     }
     public void addLast(T x) {
         item[tail] = x;
         tail = (tail + 1) & (length - 1);
         if(head == tail)
-            resizing();
+            resize();
     }
-    /** Returns the item from the back of the list. */
-    public T getLast() {
-        return item[tail];
-    }
-    public T getFirst() {
-        return item[head];
-    }
+
     /** Gets the ith item in the list (0 is the front). */
     public T get(int i) {
         return item[i];
