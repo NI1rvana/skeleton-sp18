@@ -22,6 +22,8 @@ public class LinkedListDeque<T> {
     public void addFirst(T x) {
         if(this.isEmpty()) {
             Intnode p = new Intnode(x);
+            p.next = tail;
+            p.prev = head;
             head.next = p;
             tail.prev = p;
         }
@@ -60,6 +62,7 @@ public class LinkedListDeque<T> {
         T p = tail.prev.item;
         this.tail = tail.prev;
         this.tail.next = null;
+        tail.item = null;
         this.size -= 1;
         return p;
     }
