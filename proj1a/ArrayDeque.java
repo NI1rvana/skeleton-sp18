@@ -14,7 +14,7 @@ public class ArrayDeque<T> {
         size = 0;
     }
     public boolean isEmpty() {
-        if(head == tail)
+        if(size == 0)
             return true;
         else return false;
     }
@@ -35,12 +35,14 @@ public class ArrayDeque<T> {
         head = (head - 1) & (length - 1);
         if(head == tail)
             resize();
+        size += 1;
     }
     public void addLast(T x) {
         item[tail] = x;
         tail = (tail + 1) & (length - 1);
         if(head == tail)
             resize();
+        size += 1;
     }
 
     /** Gets the ith item in the list (0 is the front). */
@@ -58,11 +60,13 @@ public class ArrayDeque<T> {
     public T removeFirst() {
         T x = item[head];
         head = (head + 1) & (length - 1);
+        size -= 1;
         return x;
     }
     public T removeLast() {
         T x = item[tail];
         tail = (tail - 1) & (length - 1);
+        size -= 1;
         return x;
     }
 
