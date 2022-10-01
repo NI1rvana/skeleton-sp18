@@ -4,8 +4,8 @@
 
 public class ArrayDeque<T> {
     /** Creates an empty list. */
-    T[] item;
-    int length,size,head,tail;
+    private T[] item;
+    private int length,size,head,tail;
 
     public ArrayDeque() {
         T[] item = (T[]) new Object[8];
@@ -70,5 +70,18 @@ public class ArrayDeque<T> {
         T x = item[tail];
         tail = (tail - 1) & (length - 1);
         return x;
+    }
+
+    public void printDeque() {
+        int p = head;
+        for (int i = head; ; i++) {
+            if(i == length + 1) {
+                i = 0;
+            }
+            System.out.print(item[i]);
+            if(i == tail) {
+                break;
+            }
+        }
     }
 }
