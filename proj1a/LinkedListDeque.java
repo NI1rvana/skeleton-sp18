@@ -62,18 +62,13 @@ public class LinkedListDeque<Node> {
         this.size -= 1;
         return p;
     }
-    private Node getRecursiveHelp(Intnode start, int index) {
-        if (index == 0) {
-            return head.item;
-        } else {
-            return getRecursiveHelp(head.next, index - 1);
+    public Node get(int x) {
+        Intnode p = head;
+        while (x > 0) {
+            p = p.next;
+            x -= 1;
         }
-    }
-    public Node getRecursive(int index) {
-        if (index >= size) {
-            return null;
-        }
-        return getRecursiveHelp(head.next, index);
+        return p.item;
     }
     public void printDeque() {
         Intnode p = this.head.next;
