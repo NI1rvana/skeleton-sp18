@@ -5,26 +5,49 @@
 public class ArrayDeque<T> {
     /** Creates an empty list. */
     T[] item;
-    int itSize = 0;
+    int length,size,head,tail;
+
     public ArrayDeque() {
-        T[] item = (T[]) new Object[100];
+        T[] item = (T[]) new Object[8];
+        length = 8;
+        head = tail = 4;
+        size = 0;
     }
-    public void resizing(int cap) {
-        T[] a = (T[]) new Object[cap];
-        System.arraycopy(item,0,a,0,itSize);
+    public boolean isEmpty() {
+        if(head == tail)
+            return true;
+        else return false;
+    }
+
+    public void resizing() {
+        T[] a = (T[]) new Object[2*length];
+        if(head >= tail)
+            System.arraycopy(item,head,a,0,tail - head);
+        else {
+            System.arraycopy(item,head,a,0,tail - 1 - head);
+            System.arraycopy(item,tail,a,tail - head,head - tail);
+        }
         item = a;
     }
     /** Inserts X into the back of the list. */
-    public void addLast(T x) {
-        if(itSize == item.length)
-            this.resizing(itSize * 2);
-        item[itSize] = x;
-        this.itSize += 1;
+    public void addFirst(T x) {
+        item[head] = x;
+        head = (head - 1) & (length - 1);
+        if(head == tail)
+            resizing();
     }
-
+    public void addLast(T x) {
+        item[tail] = x;
+        tail = (tail + 1) & (length - 1);
+        if(head == tail)
+            resizing();
+    }
     /** Returns the item from the back of the list. */
     public T getLast() {
-        return item[itSize-1];
+        return item[tail];
+    }
+    public T getFirst() {
+        return item[head];
     }
     /** Gets the ith item in the list (0 is the front). */
     public T get(int i) {
@@ -33,17 +56,19 @@ public class ArrayDeque<T> {
 
     /** Returns the number of items in the list. */
     public int size() {
-        return this.itSize;
+        return this.size;
     }
 
     /** Deletes item from back of the list and
      * returns deleted item. */
+    public T removeFirst() {
+        T x = item[head];
+        head = (head + 1) & (length - 1);
+        return x;
+    }
     public T removeLast() {
-        T returnNum = item[itSize-1];
-        itSize -= 1;
-        item[itSize] = null;
-        if(itSize * 4 < item.length)
-            resizing(item.length/2);
-        return returnNum;
+        T x = item[tail];
+        tail = (tail - 1) & (length - 1);
+        return x;
     }
 }
