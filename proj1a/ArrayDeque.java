@@ -37,6 +37,7 @@ public class ArrayDeque<T> {
 
     public void addFirst(T e) {
         item[head = (head - 1) & (item.length - 1)] = e;
+        size += 1;
         if (head == tail)
             resize();
     }
@@ -90,5 +91,6 @@ public class ArrayDeque<T> {
 
         }
     }
+
 
 }
