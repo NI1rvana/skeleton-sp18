@@ -1,25 +1,25 @@
 import java.awt.*;
 
-public class LinkedListDeque<Node> {
+public class LinkedListDeque<T> {
     private class Intnode {
-        public Node item;
-        public Intnode next;
-        public Intnode prev;
-        public Intnode(Node x) {
+        private T item;
+        private Intnode next;
+        private Intnode prev;
+        public Intnode(T x) {
             item = x;
             next = null;
             prev = null;
         }
     }
-    public Intnode head,tail;
-    public int size;
+    private Intnode head,tail;
+    private int size;
     public LinkedListDeque() {
         this.head = new Intnode(null);
         this.tail = new Intnode(null);
         this.size = 0;
     }
 
-    public void addFirst(Node x) {
+    public void addFirst(T x) {
         if(this.isEmpty()) {
             Intnode p = new Intnode(x);
             head.next = p;
@@ -34,7 +34,7 @@ public class LinkedListDeque<Node> {
         }
         this.size += 1;
     }
-    public void addLast(Node x) {
+    public void addLast(T x) {
         if(this.isEmpty()) {
             this.addFirst(x);
         }
@@ -48,34 +48,34 @@ public class LinkedListDeque<Node> {
         this.size += 1;
     }
 
-    public Node removeFirst() {
-        Node p = head.next.item;
+    public T removeFirst() {
+        T p = head.next.item;
         this.head = head.next;
         this.head.prev = null;
         this.size -= 1;
         return p;
     }
-    public Node removeLast() {
-        Node p = tail.prev.item;
+    public T removeLast() {
+        T p = tail.prev.item;
         this.tail = tail.prev;
         this.tail.next = null;
         this.size -= 1;
         return p;
     }
-    private Node getRecursiveHelp(Intnode start, int index) {
+    private T getRecursiveHelp(Intnode start, int index) {
         if (index == 0) {
             return head.item;
         } else {
             return getRecursiveHelp(head.next, index - 1);
         }
     }
-    public Node getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index >= size) {
             return null;
         }
         return getRecursiveHelp(head.next, index);
     }
-    public Node get(int x) {
+    public T get(int x) {
         Intnode p = head;
         while (x > 0) {
             p = p.next;
