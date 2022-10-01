@@ -55,6 +55,7 @@ public class LinkedListDeque<T> {
         T p = head.next.item;
         this.head = head.next;
         this.head.prev = null;
+        head.item = null;
         this.size -= 1;
         return p;
     }
@@ -81,7 +82,7 @@ public class LinkedListDeque<T> {
     }
     public T get(int x) {
         Intnode p = head;
-        while (x > 0) {
+        while (x >= 0) {
             p = p.next;
             x -= 1;
         }
@@ -89,7 +90,7 @@ public class LinkedListDeque<T> {
     }
     public void printDeque() {
         Intnode p = this.head.next;
-        while(p != null) {
+        while(p != tail) {
             System.out.print(p.item + " ");
             p = p.next;
         }
