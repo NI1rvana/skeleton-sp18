@@ -1,4 +1,3 @@
-import java.awt.*;
 
 public class LinkedListDeque<T> {
     private class Intnode {
@@ -26,27 +25,27 @@ public class LinkedListDeque<T> {
             p.prev = head;
             head.next = p;
             tail.prev = p;
-        }
-        else {
+        } else {
             Intnode p = new Intnode(null);
             head.item = x;
             head.prev = p;
             p.next = head;
             head = p;
-        } this.size += 1;
+        }
+        this.size += 1;
     }
     public void addLast(T x) {
         if (this.isEmpty()) {
             this.addFirst(x);
             return;
-        }
-        else {
+        } else {
             Intnode p = new Intnode(null);
             tail.item = x;
             tail.next = p;
             p.prev = tail;
             tail = p;
-        } this.size += 1;
+        }
+        this.size += 1;
     }
 
     public T removeFirst() {
