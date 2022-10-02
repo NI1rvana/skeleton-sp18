@@ -5,7 +5,7 @@
 public class ArrayDeque<T> {
     /** Creates an empty list. */
     private T[] item;
-    private int length,size,head,tail;
+    private int length, size, head, tail;
 
     public ArrayDeque() {
         item = (T[]) new Object[8];
@@ -15,9 +15,10 @@ public class ArrayDeque<T> {
         size = 0;
     }
     public boolean isEmpty() {
-        if(size == 0)
+        if(size == 0) {
             return true;
-        else return false;
+        }
+        return false;
     }
     private void shrink() {
         T[] newArray = (T[]) new Object[length / 2];
@@ -29,9 +30,9 @@ public class ArrayDeque<T> {
             ptr2 += 1;
         }
         item = newArray;
+        length /= 2;
         head = (0 - 1) & (length - 1);
         tail = (size) & (length - 1);
-        length /= 2;
     }
     private void resize() {
         int p = (head + 1) & (length - 1);
@@ -51,8 +52,9 @@ public class ArrayDeque<T> {
         item[head] = e;
         head = (head - 1) & (length - 1);
         size += 1;
-        if (size == length - 1)
+        if (size == length - 1) {
             resize();
+        }
     }
 //    public void addFirst(T x) {
 //        item[head] = x;
@@ -65,14 +67,16 @@ public class ArrayDeque<T> {
         item[tail] = x;
         tail = (tail + 1) & (length - 1);
         size += 1;
-        if(size == length - 1)
+        if(size == length - 1) {
             resize();
+        }
     }
 
     /** Gets the ith item in the list (0 is the front). */
     public T get(int x) {
-        if(x > size)
-            return  null;
+        if(x > size) {
+            return null;
+        }
         int p = (head + 1) % length;
         int i = p;
         while (x > 0) {
@@ -96,8 +100,9 @@ public class ArrayDeque<T> {
         if (length >= 16 && length / size >= 4) {
             shrink();
         }
-        if(size == 0)
+        if(size == 0) {
             return null;
+        }
         head = (head + 1) & (length - 1);
         T x = item[head];
         item[tail] = null;
@@ -108,8 +113,9 @@ public class ArrayDeque<T> {
         if (length >= 16 && length / size >= 4) {
             shrink();
         }
-        if(size == 0)
+        if(size == 0) {
             return null;
+        }
         tail = (tail - 1) & (length - 1);
         T x = item[tail];
         item[tail] = null;
