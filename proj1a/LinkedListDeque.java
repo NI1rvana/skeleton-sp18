@@ -87,7 +87,7 @@ public class LinkedListDeque<T> {
         return getRecursiveHelp(head.next, x);
     }
     public T get(int x) {
-        Intnode p = head;
+        Intnode p = head.next;
         while (x > 0) {
             p = p.next;
             x -= 1;
@@ -117,14 +117,7 @@ public class LinkedListDeque<T> {
 
 //    public static void main(String[] args) {
 //        LinkedListDeque L = new LinkedListDeque();
-//        L.addFirst(0);
-//        System.out.println(L.removeFirst());;
-//
-//        L.addFirst(2);
-//        L.addLast(3);
-//        L.addLast(4);
-//        System.out.println(L.size);
-//        System.out.println(L.getRecursive(3));
-//
+//        L.addLast(0);
+//        System.out.println(L.get(0));
 //    }
 }
