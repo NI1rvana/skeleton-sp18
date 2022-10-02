@@ -26,8 +26,7 @@ public class ArrayDeque<T> {
         int newCapacity = length << 1;
         T[] a = (T[]) new Object[newCapacity];
         System.arraycopy(item, p, a, 0, r);
-        System.arraycopy(item, 0, a, r, p - 1);
-
+        System.arraycopy(item, 0, a, r, p);
         this.item = a;
         length = newCapacity;
         head = (0 - 1) & (length - 1);
@@ -114,5 +113,6 @@ public class ArrayDeque<T> {
 //        L.addFirst(7);
 //        L.addFirst(8);
 //        System.out.println(L.removeLast());
+//        L.printDeque();
 //    }
 }
