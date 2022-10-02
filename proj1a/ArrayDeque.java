@@ -8,10 +8,10 @@ public class ArrayDeque<T> {
     private int length,size,head,tail;
 
     public ArrayDeque() {
-        T[] q = (T[]) new Object[8];
-        this.item = q;
+        item = (T[]) new Object[8];
         length = 8;
-        head = tail = 4;
+        head = 3;
+        tail = 4;
         size = 0;
     }
     public boolean isEmpty() {
@@ -21,22 +21,22 @@ public class ArrayDeque<T> {
     }
 
     private void resize() {
-        int p = head;
-        int n = item.length;
-        int r = n - p; // number of elements to the right of p
-        int newCapacity = n << 1;
+        int p = (head + 1) & (length - 1);
+        int r = length - p; // number of elements to the right of p
+        int newCapacity = length << 1;
         T[] a = (T[]) new Object[newCapacity];
         System.arraycopy(item, p, a, 0, r);
         System.arraycopy(item, 0, a, r, p);
         this.item = a;
         length = newCapacity;
-        head = 0;
-        tail = n;
+        head = (0 - 1) & (length - 1);
+        tail = (size + 1) & (length - 1);
     }
         /** Inserts X into the back of the list. */
 
     public void addFirst(T e) {
-        item[head = (head - 1) & (item.length - 1)] = e;
+        item[head] = e;
+        head = (head - 1) & (length - 1);
         size += 1;
         if (head == tail)
             resize();
@@ -51,13 +51,24 @@ public class ArrayDeque<T> {
     public void addLast(T x) {
         item[tail] = x;
         tail = (tail + 1) & (length - 1);
-        if(size == length - 1)
-            resize();
         size += 1;
+        if(head == tail)
+            resize();
     }
 
     /** Gets the ith item in the list (0 is the front). */
-    public T get(int i) {
+    public T get(int x) {
+        if(x > size)
+            return  null;
+        int p = (head + 1) % length;
+        int i = p;
+        while (x > 0) {
+            i += 1;
+            x -= 1;
+            if(i == length) {
+                i = 0;
+            }
+        }
         return item[i];
     }
 
@@ -69,7 +80,7 @@ public class ArrayDeque<T> {
     /** Deletes item from back of the list and
      * returns deleted item. */
     public T removeFirst() {
-        head = (head + 1) & (length - 1);
+        head = (head ) & (length - 1);
         T x = item[head];
         size -= 1;
         return x;
@@ -83,15 +94,20 @@ public class ArrayDeque<T> {
 
     public void printDeque() {
         int p = (head + 1) % length;
-        for (int i = p;i != (tail - 1) ; i++) {
-            if(i == length) {
-                i = 0;
-            }
-            System.out.println(item[i] + " ");
 
+        for (int i = p;i != (tail - 1) ; i++) {
+            i %= length;
+            System.out.print(item[i] + " ");
         }
     }
-
-
-
+//    public static void main(String[] args) {
+//        ArrayDeque L = new ArrayDeque();
+//        for (int i = 0; i < 100; i++) {
+//            L.addFirst(i);
+//        }
+//
+//        System.out.println(L.size);
+//        L.printDeque();
+//    //    System.out.println(L.get(1));
+//    }
 }
