@@ -52,6 +52,9 @@ public class LinkedListDeque<T> {
     }
 
     public T removeFirst() {
+        if(this.isEmpty()) {
+            return null;
+        }
         T p = head.next.item;
         this.head = head.next;
         this.head.prev = null;
@@ -60,6 +63,9 @@ public class LinkedListDeque<T> {
         return p;
     }
     public T removeLast() {
+        if(this.isEmpty()) {
+            return null;
+        }
         T p = tail.prev.item;
         this.tail = tail.prev;
         this.tail.next = null;
@@ -67,22 +73,22 @@ public class LinkedListDeque<T> {
         this.size -= 1;
         return p;
     }
-    private T getRecursiveHelp(Intnode start, int index) {
-        if (index == 0) {
-            return head.item;
+    private T getRecursiveHelp(Intnode start, int x) {
+        if (x == 1) {
+            return start.item;
         } else {
-            return getRecursiveHelp(head.next, index - 1);
+            return getRecursiveHelp(start.next, x - 1);
         }
     }
-    public T getRecursive(int index) {
-        if (index >= size) {
+    public T getRecursive(int x) {
+        if (x > size) {
             return null;
         }
-        return getRecursiveHelp(head.next, index);
+        return getRecursiveHelp(head.next, x);
     }
     public T get(int x) {
         Intnode p = head;
-        while (x >= 0) {
+        while (x > 0) {
             p = p.next;
             x -= 1;
         }
@@ -109,4 +115,16 @@ public class LinkedListDeque<T> {
         return this.size;
     }
 
+//    public static void main(String[] args) {
+//        LinkedListDeque L = new LinkedListDeque();
+//        L.addFirst(0);
+//        System.out.println(L.removeFirst());;
+//
+//        L.addFirst(2);
+//        L.addLast(3);
+//        L.addLast(4);
+//        System.out.println(L.size);
+//        System.out.println(L.getRecursive(3));
+//
+//    }
 }
