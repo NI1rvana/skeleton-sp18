@@ -19,7 +19,20 @@ public class ArrayDeque<T> {
             return true;
         else return false;
     }
-
+    private void shrink() {
+        T[] newArray = (T[]) new Object[length / 2];
+        int ptr1 = (head + 1) & (length - 1);
+        int ptr2 = 0;
+        while (ptr1 != tail) {
+            newArray[ptr2] = item[ptr1];
+            ptr1 = (ptr1 + 1) & (length - 1);
+            ptr2 += 1;
+        }
+        item = newArray;
+        head = (0 - 1) & (length - 1);
+        tail = (size) & (length - 1);
+        length /= 2;
+    }
     private void resize() {
         int p = (head + 1) & (length - 1);
         int r = length - p; // number of elements to the right of p
@@ -80,6 +93,11 @@ public class ArrayDeque<T> {
     /** Deletes item from back of the list and
      * returns deleted item. */
     public T removeFirst() {
+        if (length >= 16 && length / size >= 4) {
+            shrink();
+        }
+        if(size == 0)
+            return null;
         head = (head + 1) & (length - 1);
         T x = item[head];
         item[tail] = null;
@@ -87,6 +105,11 @@ public class ArrayDeque<T> {
         return x;
     }
     public T removeLast() {
+        if (length >= 16 && length / size >= 4) {
+            shrink();
+        }
+        if(size == 0)
+            return null;
         tail = (tail - 1) & (length - 1);
         T x = item[tail];
         item[tail] = null;
@@ -103,16 +126,13 @@ public class ArrayDeque<T> {
     }
 //    public static void main(String[] args) {
 //        ArrayDeque L = new ArrayDeque();
-//        L.addFirst(0);
-//        L.addFirst(1);
-//        L.addFirst(2);
-//        System.out.println(L.removeLast());
-//        L.addFirst(4);
-//        L.addFirst(5);
-//        L.addFirst(6);
-//        L.addFirst(7);
-//        L.addFirst(8);
-//        System.out.println(L.removeLast());
+//        for (int i = 0; i < 1000; i++) {
+//            L.addFirst(i);
+//        }
+//        for (int i = 0; i < 990 ; i++) {
+//            L.removeLast();
+//        }
 //        L.printDeque();
+//        System.out.println(L.size);
 //    }
 }
