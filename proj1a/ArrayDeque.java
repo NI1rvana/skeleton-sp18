@@ -69,14 +69,14 @@ public class ArrayDeque<T> {
     /** Deletes item from back of the list and
      * returns deleted item. */
     public T removeFirst() {
-        T x = item[head];
         head = (head + 1) & (length - 1);
+        T x = item[head];
         size -= 1;
         return x;
     }
     public T removeLast() {
-        T x = item[tail];
         tail = (tail - 1) & (length - 1);
+        T x = item[tail];
         size -= 1;
         return x;
     }
@@ -91,6 +91,7 @@ public class ArrayDeque<T> {
 
         }
     }
+
 
 
 }
