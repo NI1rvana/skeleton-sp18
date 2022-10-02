@@ -126,7 +126,7 @@ public class ArrayDeque<T> {
     public void printDeque() {
         int p = (head + 1) & (length - 1);
 
-        for (int i = p;i != (tail) % (length - 1) ; i = (i + 1) & (length - 1)) {
+        for (int i = p; i != (tail) % (length - 1); i = (i + 1) & (length - 1)) {
             System.out.print(item[i] + " ");
         }
     }
