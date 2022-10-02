@@ -80,7 +80,7 @@ public class ArrayDeque<T> {
     /** Deletes item from back of the list and
      * returns deleted item. */
     public T removeFirst() {
-        head = (head ) & (length - 1);
+        head = (head + 1) & (length - 1);
         T x = item[head];
         size -= 1;
         return x;
@@ -100,14 +100,14 @@ public class ArrayDeque<T> {
             System.out.print(item[i] + " ");
         }
     }
-//    public static void main(String[] args) {
-//        ArrayDeque L = new ArrayDeque();
-//        for (int i = 0; i < 100; i++) {
-//            L.addFirst(i);
-//        }
-//
-//        System.out.println(L.size);
-//        L.printDeque();
-//    //    System.out.println(L.get(1));
-//    }
+    public static void main(String[] args) {
+        ArrayDeque L = new ArrayDeque();
+        for (int i = 0; i < 100; i++) {
+            L.addFirst(i);
+        }
+
+        System.out.println(L.removeFirst());
+        L.printDeque();
+    //    System.out.println(L.get(1));
+    }
 }
