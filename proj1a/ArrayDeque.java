@@ -26,11 +26,12 @@ public class ArrayDeque<T> {
         int newCapacity = length << 1;
         T[] a = (T[]) new Object[newCapacity];
         System.arraycopy(item, p, a, 0, r);
-        System.arraycopy(item, 0, a, r, p);
+        System.arraycopy(item, 0, a, r, p - 1);
+
         this.item = a;
         length = newCapacity;
         head = (0 - 1) & (length - 1);
-        tail = (size + 1) & (length - 1);
+        tail = (size) & (length - 1);
     }
         /** Inserts X into the back of the list. */
 
@@ -38,7 +39,7 @@ public class ArrayDeque<T> {
         item[head] = e;
         head = (head - 1) & (length - 1);
         size += 1;
-        if (head == tail)
+        if (size == length - 1)
             resize();
     }
 //    public void addFirst(T x) {
@@ -52,7 +53,7 @@ public class ArrayDeque<T> {
         item[tail] = x;
         tail = (tail + 1) & (length - 1);
         size += 1;
-        if(head == tail)
+        if(size == length - 1)
             resize();
     }
 
@@ -82,32 +83,36 @@ public class ArrayDeque<T> {
     public T removeFirst() {
         head = (head + 1) & (length - 1);
         T x = item[head];
+        item[tail] = null;
         size -= 1;
         return x;
     }
     public T removeLast() {
         tail = (tail - 1) & (length - 1);
         T x = item[tail];
+        item[tail] = null;
         size -= 1;
         return x;
     }
 
     public void printDeque() {
-        int p = (head + 1) % length;
+        int p = (head + 1) & (length - 1);
 
-        for (int i = p;i != (tail - 1) ; i++) {
-            i %= length;
+        for (int i = p;i != (tail) % (length - 1) ; i = (i + 1) & (length - 1)) {
             System.out.print(item[i] + " ");
         }
     }
-    public static void main(String[] args) {
-        ArrayDeque L = new ArrayDeque();
-        for (int i = 0; i < 100; i++) {
-            L.addFirst(i);
-        }
-
-        System.out.println(L.removeFirst());
-        L.printDeque();
-    //    System.out.println(L.get(1));
-    }
+//    public static void main(String[] args) {
+//        ArrayDeque L = new ArrayDeque();
+//        L.addFirst(0);
+//        L.addFirst(1);
+//        L.addFirst(2);
+//        System.out.println(L.removeLast());
+//        L.addFirst(4);
+//        L.addFirst(5);
+//        L.addFirst(6);
+//        L.addFirst(7);
+//        L.addFirst(8);
+//        System.out.println(L.removeLast());
+//    }
 }
