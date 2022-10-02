@@ -15,7 +15,7 @@ public class ArrayDeque<T> {
         size = 0;
     }
     public boolean isEmpty() {
-        if(size == 0) {
+        if (size == 0) {
             return true;
         }
         return false;
@@ -67,14 +67,14 @@ public class ArrayDeque<T> {
         item[tail] = x;
         tail = (tail + 1) & (length - 1);
         size += 1;
-        if(size == length - 1) {
+        if (size == length - 1) {
             resize();
         }
     }
 
     /** Gets the ith item in the list (0 is the front). */
     public T get(int x) {
-        if(x > size) {
+        if (x > size) {
             return null;
         }
         int p = (head + 1) % length;
@@ -82,7 +82,7 @@ public class ArrayDeque<T> {
         while (x > 0) {
             i += 1;
             x -= 1;
-            if(i == length) {
+            if (i == length) {
                 i = 0;
             }
         }
@@ -100,7 +100,7 @@ public class ArrayDeque<T> {
         if (length >= 16 && length / size >= 4) {
             shrink();
         }
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
         head = (head + 1) & (length - 1);
@@ -113,7 +113,7 @@ public class ArrayDeque<T> {
         if (length >= 16 && length / size >= 4) {
             shrink();
         }
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
         tail = (tail - 1) & (length - 1);
