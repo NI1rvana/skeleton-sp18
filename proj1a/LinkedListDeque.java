@@ -33,8 +33,7 @@ public class LinkedListDeque<T> {
             head.prev = p;
             p.next = head;
             head = p;
-        }
-        this.size += 1;
+        } this.size += 1;
     }
     public void addLast(T x) {
         if (this.isEmpty()) {
@@ -47,8 +46,7 @@ public class LinkedListDeque<T> {
             tail.next = p;
             p.prev = tail;
             tail = p;
-        }
-        this.size += 1;
+        } this.size += 1;
     }
 
     public T removeFirst() {
@@ -104,10 +102,7 @@ public class LinkedListDeque<T> {
     }
 
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-            return false;
+        return size == 0;
     }
     public int size() {
         return this.size;
