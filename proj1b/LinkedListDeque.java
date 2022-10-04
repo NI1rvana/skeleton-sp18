@@ -1,5 +1,5 @@
 
-public class LinkedListDeque<T> {
+public class Deque<T> {
     private class Intnode {
         private T item;
         private Intnode next;
@@ -12,7 +12,7 @@ public class LinkedListDeque<T> {
     }
     private Intnode head, tail;
     private int size;
-    public LinkedListDeque() {
+    public Deque() {
         this.head = new Intnode(null);
         this.tail = new Intnode(null);
         this.size = 0;
