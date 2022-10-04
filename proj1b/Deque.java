@@ -1,4 +1,3 @@
-
 public class Deque<T> {
     private class Intnode {
         private T item;
