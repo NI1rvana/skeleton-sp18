@@ -1,31 +1,31 @@
 public class Palindrome {
-    /** convert a word to dq. */
     public Deque<Character> wordToDeque(String word) {
-        Deque<Character> dq = new ArrayDeque<>();
-        int len = word.length();
-        for (int i = 0; i < len; i++) {
-            dq.addLast(word.charAt(i));
+        Deque w = new Deque<>();
+        for (int i = 0; i < word.length(); i++) {
+            w.addLast(word.charAt(i));
         }
-        return dq;
+        return w;
     }
 
-    /** decide if the given word is palindrome. */
     public boolean isPalindrome(String word) {
-        if (word == null || word.length() <= 1) {
+        Deque w = this.wordToDeque(word);
+        int flag = 1;
+        int size = w.size();
+        if (size == 1 || size == 0) {
             return true;
         }
-        int len = word.length();
-        for (int i = 0; i < len / 2; i++) {
-            if (word.charAt(i) != word.charAt(len - i - 1)) {
-                return false;
+        while (w.size() > 1) {
+            if (w.removeFirst() != w.removeLast()) {
+                flag = 0;
+                break;
             }
         }
-        return true;
+        if (flag == 0) {
+            return false;
+        }
+        return  true;
     }
 
-    /** overloaded isPalindrome, decide if the given word is palindrome.
-     * according to the given CharacterComparator
-     */
     public boolean isPalindrome(String word, CharacterComparator cc) {
         if (word == null || word.length() <= 1) {
             return true;
