@@ -29,7 +29,7 @@ public class IntList {
      * A List with null rest, and first = 0.
      */
     public IntList() {
-    /* NOTE: public IntList () { }  would also work. */
+        /* NOTE: public IntList () { }  would also work. */
         this(0, null);
     }
 
@@ -79,27 +79,16 @@ public class IntList {
      * Returns a list consisting of the elements of A followed by the
      * *  elements of B.  May modify items of A. Don't use 'new'.
      */
-    //modifies
+
     public static IntList dcatenate(IntList A, IntList B) {
-        if (A.first != 0 && B.first == 0) {
-            return A;
-        } else if (A.first == 0 && B.first != 0) {
-            A.first = B.first;
-            A.rest = B.rest;
-            return  A;
-        } else if (A.first == 0 && B.first == 0) {
-            return  null;
+        if(A == null){
+            return B;
         }
-        IntList p = A, q = B;
-        while (p.rest != null) {
-            p = p.rest;
+        IntList ptr = A;
+        while(ptr.rest != null){
+            ptr = ptr.rest;
         }
-        while (q.rest != null) {
-            p.rest = new IntList(q.first ,null);
-            p = p.rest;
-            q = q.rest;
-        }
-        p.rest = new IntList(q.first ,null);
+        ptr.rest = B;
         return A;
     }
 
@@ -108,29 +97,27 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        if (A.first != 0 && B.first == 0) {
-            return A;
-        } else if (A.first == 0 && B.first != 0) {
-            return  B;
-        } else if (A.first == 0 && B.first == 0) {
-            return  null;
+        if(A == null){
+            return B;
         }
-        IntList C = new IntList(0,null);
-        IntList now = C, p = A, q = B;
-        now.first = p.first;
-        while (p.rest != null) {
-            now.rest = new IntList(p.rest.first,null);
-            now = now.rest;
-            p = p.rest;
+        if(A.rest == null){
+            return new IntList(A.first, B);
         }
-        while (q.rest != null) {
-            now.rest = new IntList(q.first,null);
-            now = now.rest;
-            q = q.rest;
-        }
-        now.rest = new IntList(q.first,null);
-        return C;
+        return new IntList(A.first, catenate(A.rest, B));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
